@@ -1,0 +1,19 @@
+﻿@page "/login"
+@attribute [AllowAnonymous]
+@layout MyLayout
+<h3>Login</h3>
+<EditForm Model="MyForm" OnValidSubmit="Authenticate">
+    <p>
+        <label>Email </label>
+        <InputText type="email" @bind-Value="MyForm.Email" />
+    </p>
+    <p>
+        <label>Is Admin ? </label>
+        <InputCheckbox @bind-Value="MyForm.IsAdmin" />
+    </p>
+
+    <button type="submit">Se connecter</button>
+</EditForm>
+@code {
+
+}
