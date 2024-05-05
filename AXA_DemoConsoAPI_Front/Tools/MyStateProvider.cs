@@ -18,8 +18,8 @@ namespace AXA_DemoConsoAPI_Front.Tools
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await _js.InvokeAsync<string>("sessionStorage.getItem", "token");
-
+            string token = await _js.InvokeAsync<string>("localStorage.getItem", "token");
+            Console.WriteLine(token);
             if (!string.IsNullOrEmpty(token))
             {
                 JwtSecurityToken jwt = new JwtSecurityToken(token);
@@ -37,15 +37,15 @@ namespace AXA_DemoConsoAPI_Front.Tools
                 }
 
                 ClaimsIdentity currentUser = new ClaimsIdentity(claims, "toto");
-                ClaimsPrincipal user = new ClaimsPrincipal(currentUser);
                 
-                Console.WriteLine(user);
+                
+                //Console.WriteLine(user);
 
-                return Task.FromResult(new AuthenticationState(new ClaimsPrincipal(currentUser))).Result;
+                return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(currentUser)));
             }
 
-            Console.WriteLine(new ClaimsPrincipal(new ClaimsIdentity()).Identity.IsAuthenticated);
-            return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())));
+            //Console.WriteLine(new ClaimsPrincipal(new ClaimsIdentity()).Identity.IsAuthenticated);
+            return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
 
 
         }

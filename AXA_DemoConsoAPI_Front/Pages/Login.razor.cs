@@ -33,7 +33,7 @@ namespace AXA_DemoConsoAPI_Front.Pages
 
         public async Task Authenticate()
         {
-            _client.BaseAddress = new Uri(url);
+            //_client.BaseAddress = new Uri(url);
 
             string json = JsonSerializer.Serialize(MyForm);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -47,7 +47,7 @@ namespace AXA_DemoConsoAPI_Front.Pages
 
                 string jsonresponse = await response.Content.ReadAsStringAsync();
 
-                await _js.InvokeVoidAsync("sessionStorage.setItem", "token", jsonresponse);
+                await _js.InvokeVoidAsync("localStorage.setItem", "token", jsonresponse);
 
                 ((MyStateProvider)service.GetService<AuthenticationStateProvider>()).NotifyUserChanged();
 

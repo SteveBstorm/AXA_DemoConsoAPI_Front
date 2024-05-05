@@ -18,7 +18,7 @@ namespace AXA_DemoConsoAPI_Front.Pages
         protected override async Task OnInitializedAsync()
         {
             //_client.BaseAddress = new Uri(url);
-            string token = await _js.InvokeAsync<string>("sessionStorage.getItem", "token");
+            string token = await _js.InvokeAsync<string>("localStorage.getItem", "token");
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             using(HttpResponseMessage message = await _client.GetAsync("client"))
